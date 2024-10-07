@@ -1,0 +1,71 @@
+---
+const venueImages = [
+  { src: ["/images/cropped-whatsapp-image-2023-05-02-at-15.46.12-1.jpeg", "/images/cropped-whatsapp-image-2024-06-20-at-16.56.30.jpeg"], alt: "Venue 1", description: "This is a beautiful beachfront venue perfect for romantic ceremonies." },
+  { src: ["/images/image-2023-05-26-at-16.01.28-1.jpeg", "/images/image-2023-05-26-at-16.01.30 (1).jpeg"], alt: "Venue 2", description: "Our lush garden venue offers a serene and intimate atmosphere." },
+  { src: ["images/image-2023-05-26-at-16.01.31-1.jpeg", "/images/whatsapp-image-2023-03-29-at-14.31.58-1.jpeg"], alt: "Venue 3", description: "A stunning sunset view with a tropical setting for your wedding." },
+  { src: ["/images/whatsapp-image-2023-03-29-at-14.32.01-2.jpeg", "/images/whatsapp-image-2023-03-29-at-14.38.28-1.jpeg"], alt: "Venue 4", description: "A modern, luxurious hall with panoramic views of the ocean." },
+];
+---
+
+<section id="venue" class="py-16 bg-gray-50">
+  <div class="container mx-auto">
+    <!-- <h2 class="text-3xl font-bold text-center mb-12">The Venue</h2> -->
+
+    <!-- Venue Section -->
+    {venueImages.map((venue, index) => (
+      <div class={`flex flex-col md:flex-row ${index % 2 === 0 ? '' : 'md:flex-row-reverse'} items-center mb-12`} key={index}>
+        <!-- Image Slideshow -->
+        <div class="w-full md:w-1/2">
+          <div class="relative w-full h-64 md:h-96 overflow-hidden">
+            <img id={`venue-img-${index}`} src={venue.src[0]} alt={venue.alt} class="w-full h-full object-cover transition-all duration-500 ease-in-out" />
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="w-full md:w-1/2 px-6">
+          <p class="text-lg mt-4 md:mt-0">{venue.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  const venueImages = [
+    ["/images/cropped-whatsapp-image-2023-05-02-at-15.46.12-1.jpeg", "/images/cropped-whatsapp-image-2024-06-20-at-16.56.30.jpeg"],
+    ["/images/image-2023-05-26-at-16.01.28-1.jpeg", "/images/image-2023-05-26-at-16.01.30 (1).jpeg"],
+    ["images/image-2023-05-26-at-16.01.31-1.jpeg", "/images/whatsapp-image-2023-03-29-at-14.31.58-1.jpeg"],
+    ["/images/whatsapp-image-2023-03-29-at-14.32.01-2.jpeg", "/images/whatsapp-image-2023-03-29-at-14.38.28-1.jpeg"],
+  ];
+
+  venueImages.forEach((images, index) => {
+    let imgIndex = 0;
+    setInterval(() => {
+      const imgElement = document.getElementById(`venue-img-${index}`);
+      
+      // Fade out current image
+      imgElement.classList.add('opacity-0');
+      
+      // Change image after fade out
+      setTimeout(() => {
+        imgIndex = (imgIndex + 1) % images.length;
+        imgElement.src = images[imgIndex];
+        
+        // Fade in new image
+        imgElement.classList.remove('opacity-0');
+      }, 1000); // 1 second delay for smooth fade
+    }, 4000); // Change image every 4 seconds
+  });
+</script>
+
+<style>
+    <style>
+  .venue-img {
+    transition: opacity 1s ease-in-out;
+  }
+
+  .opacity-0 {
+    opacity: 0;
+  }
+</style>
+</style>
